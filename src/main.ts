@@ -15,7 +15,7 @@ async function bootstrap() {
   );
   app.use(passport.initialize());
   app.use(passport.session());
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('/api');
   app.enableCors();
 
   const config = new DocumentBuilder()
@@ -25,7 +25,7 @@ async function bootstrap() {
     .addTag('api')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/', app, document);
+  SwaggerModule.setup('/api', app, document);
   await app.listen(5004);
 }
 bootstrap().then((r) => {});
