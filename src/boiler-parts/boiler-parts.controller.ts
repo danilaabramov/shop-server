@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { BoilerPartsService } from './boiler-parts.service';
 import { AuthenticatedGuard } from '../auth/authenticated.guard';
 import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
@@ -48,7 +56,7 @@ export class BoilerPartsController {
   @ApiOkResponse({ type: SearchResponse })
   @ApiBody({ type: SearchRequest })
   @UseGuards(AuthenticatedGuard)
-  @Get('search')
+  @Post('search')
   search(@Body() { search }: { search: string }) {
     return this.boilerPartsService.searchByString(search);
   }
@@ -56,7 +64,7 @@ export class BoilerPartsController {
   @ApiOkResponse({ type: GetByNameResponse })
   @ApiBody({ type: GetByNameRequest })
   @UseGuards(AuthenticatedGuard)
-  @Get('name')
+  @Post('name')
   getByName(@Body() { name }: { name: string }) {
     return this.boilerPartsService.findOneByName(name);
   }
